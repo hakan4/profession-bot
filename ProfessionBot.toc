@@ -1,0 +1,5 @@
+## Interface: 20501
+## Title: ProfessionBot
+## Version: 0.0.1
+
+ProfessionBot.lua
