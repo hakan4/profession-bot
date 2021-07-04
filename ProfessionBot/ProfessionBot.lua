@@ -80,13 +80,13 @@ function openExporterWindow(tradeskillName, rank, text, text2, text3, text4, rec
 	local editText2 = ''
 	local editText3 = ''
 	local editText4 = ''
-	if text2 ~= "" then
+	if text2 ~= '' then
 		editText2 = "\n\n!profession import " .. encode64(playerName .. "|" .. tradeskillName .. "|" .. text2 )
 	end
-	if text3 ~="" then
+	if text3 ~= '' then
 		editText3 = "\n\n!profession import " .. encode64(playerName .. "|" .. tradeskillName .. "|" .. text3 )
 	end
-	if text4 ~="" then
+	if text4 ~= '' then
 		editText4 = "\n\n!profession import " .. encode64(playerName .. "|" .. tradeskillName .. "|" .. text4 )
 	end
 	
