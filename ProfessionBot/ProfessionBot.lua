@@ -17,17 +17,19 @@ SlashCmdList["PROFESSIONBOT"] = function(msg)
 			local name, _, type, _, _, _, _ = GetCraftInfo(i)
 			if (name and type ~= "header") then
 				app = '\n' .. name .. "#" .. getItemId("craft", i)
-				if i < 50 then 
+				if i < 40 then 
 					text = text .. app
-				elseif i < 100 then
+				elseif i < 80 then
 					text2 = text2 .. app
-				else
+				elseif i < 120 then
 					text3 = text3 .. app
+				else
+					text4 = text4 .. app
 				end
 				recipeCount = recipeCount + 1
 			end
 		end
-		openExporterWindow(craftName, craftRank, text, text2, text3, recipeCount)
+		openExporterWindow(craftName, craftRank, text, text2, text3, text4, recipeCount)
 	elseif(tsRank > 0) then
 		local text = ''
 		local text2 = ''
@@ -38,17 +40,19 @@ SlashCmdList["PROFESSIONBOT"] = function(msg)
 			local name, type, _, _, _, _ = GetTradeSkillInfo(i)
 			if (name and type ~= "header") then
 				app = '\n' .. name .. "#" .. getItemId("trade", i)
-				if i < 50 then 
+				if i < 40 then 
 					text = text .. app
-				elseif i < 100 then
+				elseif i < 80 then
 					text2 = text2 .. app
-				else
+				elseif i < 120 then
 					text3 = text3 .. app
+				else
+					text4 = text4 .. app
 				end
 				recipeCount = recipeCount + 1
 			end
 		end
-		openExporterWindow(tsName, tsRank, text, text2, text3, recipeCount)
+		openExporterWindow(tsName, tsRank, text, text2, text3, text4, recipeCount)
 	end
 end
 
@@ -58,7 +62,7 @@ function showHelp()
 	print("Open a tradeskill window and type /prof to open the exporter")
 end
 
-function openExporterWindow(tradeskillName, rank, text, text2, text3, recipeCount)
+function openExporterWindow(tradeskillName, rank, text, text2, text3, text4, recipeCount)
 	if not ProfessionBotExporterWindow then
 		createExporterWindow()
 	end
@@ -73,10 +77,20 @@ function openExporterWindow(tradeskillName, rank, text, text2, text3, recipeCoun
 	local hlLen = string.len(editText)
 	editText =  editText .. importString
 
-	local editText2 = "!profession import " .. encode64(playerName .. "|" .. tradeskillName .. "|" .. text2 )
-	local editText3 = "!profession import " .. encode64(playerName .. "|" .. tradeskillName .. "|" .. text3 )
+	local editText2 = ''
+	local editText3 = ''
+	local editText4 = ''
+	if text2 ~= "" then
+		editText2 = "\n\n!profession import " .. encode64(playerName .. "|" .. tradeskillName .. "|" .. text2 )
+	end
+	if text3 ~="" then
+		editText3 = "\n\n!profession import " .. encode64(playerName .. "|" .. tradeskillName .. "|" .. text3 )
+	end
+	if text4 ~="" then
+		editText4 = "\n\n!profession import " .. encode64(playerName .. "|" .. tradeskillName .. "|" .. text4 )
+	end
 	
-	ProfessionBotExporterWindow.editBox:SetText(editText .. '\n\n' .. editText2 .. '\n\n' .. editText3)
+	ProfessionBotExporterWindow.editBox:SetText(editText .. editText2 .. editText3 .. editText4)
 	ProfessionBotExporterWindow.editBox:HighlightText(hlLen, hlLen + string.len(importString))
 	ProfessionBotExporterWindow:Show()
 end
