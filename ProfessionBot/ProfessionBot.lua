@@ -166,3 +166,4 @@ function decode64(str)
 	end
 	return table.concat(t, "", 1, j-1)
 end
+
